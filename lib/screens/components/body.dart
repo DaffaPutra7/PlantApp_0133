@@ -24,12 +24,35 @@ class Body extends StatelessWidget {
             TitleWithMoreButton(title: "Recommended", press: () {}),
             RecomendsPlants(),
             TitleWithMoreButton(title: "Featured Plants", press: () {}),
-            FeaturePlantCard(
-              image: "assets/images/bottom_image1.jpg",
-              press: () {},
-            )
+            FeaturedPlants(),
+            SizedBox(height: kDefaultPadding),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class FeaturedPlants extends StatelessWidget {
+  const FeaturedPlants({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: <Widget> [
+          FeaturePlantCard(
+            image: "assets/images/bottom_image1.jpg",
+            press: () {},
+          ),
+          FeaturePlantCard(
+            image: "assets/images/bottom_image2.jpg",
+            press: () {},
+          ),
+        ],
       ),
     );
   }
@@ -61,6 +84,7 @@ class FeaturePlantCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           image: DecorationImage(
+            fit: BoxFit.cover,
             image: AssetImage(image)
           )
         ),
