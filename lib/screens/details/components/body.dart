@@ -28,6 +28,30 @@ class BodyDetails extends StatelessWidget {
                           }, 
                           icon: SvgPicture.asset("assets/icons/back_arrow.svg", height: 50, width: 50),
                         ),
+                      ),
+                      Spacer(),
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: size.height * 0.03),
+                        padding: EdgeInsets.all(kDefaultPadding / 2),
+                        height: 62,
+                        width: 62,
+                        decoration: BoxDecoration(
+                          color: kBackgroundColor,
+                          borderRadius: BorderRadius.circular(6),
+                          boxShadow: [
+                            BoxShadow(
+                              offset: Offset(0, 15),
+                              blurRadius: 22,
+                              color: kPrimaryColor.withOpacity(0.22),
+                            ),
+                            BoxShadow(
+                              offset: Offset(-15, -15),
+                              blurRadius: 20,
+                              color: Colors.white
+                            ),
+                          ],
+                        ),
+                        child: SvgPicture.asset("assets/icons/sun.svg", color: kPrimaryColor,),
                       )
                     ],
                   ),
