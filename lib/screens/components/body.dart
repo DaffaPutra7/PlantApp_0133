@@ -21,15 +21,47 @@ class Body extends StatelessWidget {
             HeaderWithSearchBox(size: size),
             TitleWithMoreButton(title: "Recommended", press: () {}),
             // Menutupi 40% dari total lebar
-            RecomendPlantCard(
-              image: "assets/images/image1.jpg",
-              title: "Samantha",
-              country: "Russia",
-              price: 440,
-              press: () {},
-            ),
+            RecomendsPlants(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class RecomendsPlants extends StatelessWidget {
+  const RecomendsPlants({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          RecomendPlantCard(
+            image: "assets/images/image1.jpg",
+            title: "Samantha",
+            country: "Russia",
+            price: 440,
+            press: () {},
+          ),
+          RecomendPlantCard(
+            image: "assets/images/image2.jpg",
+            title: "Angelica",
+            country: "Russia",
+            price: 440,
+            press: () {},
+          ),
+          RecomendPlantCard(
+            image: "assets/images/image3.jpg",
+            title: "Samantha",
+            country: "Russia",
+            price: 440,
+            press: () {},
+          ),
+        ],
       ),
     );
   }
@@ -61,7 +93,12 @@ class RecomendPlantCard extends StatelessWidget {
       width: size.width * 0.4,
       child: Column(
         children: <Widget>[
-          Image.asset(image),
+          Image.asset(
+            image,
+            height: 150,
+            width: double.infinity,
+            fit: BoxFit.cover,
+          ),
           GestureDetector(
             onTap: press,
             child: Container(
