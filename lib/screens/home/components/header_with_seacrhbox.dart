@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:plantapp_133/constants.dart';
+import 'package:plantapp_133/profile/profile_page.dart';
 
 class HeaderWithSearchBox extends StatelessWidget {
   const HeaderWithSearchBox({
@@ -42,7 +43,17 @@ class HeaderWithSearchBox extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                Image.asset("assets/images/logo.png"),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProfilePage())
+                    );
+                  },
+                  child: Image.asset(
+                    "assets/images/logo.png"
+                  )
+                ),
               ],
             ),
           ),

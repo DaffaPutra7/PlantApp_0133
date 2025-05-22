@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:plantapp_133/constants.dart';
+import 'package:plantapp_133/profile/profile_page.dart';
 import 'package:plantapp_133/screens/camera/home_page.dart';
 import 'package:plantapp_133/screens/map/home_page.dart';
 
@@ -50,7 +51,12 @@ class MyBottomNavbar extends StatelessWidget {
             icon: SvgPicture.asset("assets/icons/map.svg", height: 25, width: 25, color: kPrimaryColor)
           ),
           IconButton(
-            onPressed: () {}, 
+            onPressed: () {
+              Navigator.push(
+                context, 
+                MaterialPageRoute(builder: (context) => ProfilePage())
+              );
+            }, 
             icon: SvgPicture.asset("assets/icons/user_icon.svg", height: 25, width: 25, color: kPrimaryColor)
           ),
         ],
