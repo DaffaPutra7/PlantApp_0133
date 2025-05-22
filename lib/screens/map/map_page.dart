@@ -38,7 +38,7 @@ class _MapPageState extends State<MapPage> {
       final placemarks = await placemarkFromCoordinates(
         _currentPosition!.latitude, 
         _currentPosition!.longitude
-      );
+      ).timeout(const Duration(seconds: 5));
 
       final p = placemarks.first;
       _currentAddress = '${p.name}, ${p.locality}, ${p.country}';
@@ -82,12 +82,14 @@ class _MapPageState extends State<MapPage> {
   }
 
   Future<void> _onTap(LatLng latlng) async {
+  try {
     final placemarks = await placemarkFromCoordinates(
-      latlng.latitude, 
-      latlng.longitude
-    );
+      latlng.latitude,
+      latlng.longitude,
+    ).timeout(const Duration(seconds: 5)); // timeout
 
     final p = placemarks.first;
+
     setState(() {
       _pickedMarker = Marker(
         markerId: const MarkerId('picked'),
@@ -97,16 +99,37 @@ class _MapPageState extends State<MapPage> {
           snippet: '${p.street}, ${p.locality}',
         ),
       );
+      _pickedAddress =
+          '${p.name}, ${p.street}, ${p.locality}, ${p.country}, ${p.postalCode}';
     });
 
     final ctrl = await _ctrl.future;
     await ctrl.animateCamera(CameraUpdate.newLatLngZoom(latlng, 16));
-
+  } on TimeoutException {
+    // Tangani timeout dengan fallback alamat sederhana
     setState(() {
-      _pickedAddress = 
-          '${p.name},${p.street},${p.locality},${p.country},${p.postalCode}';
+      _pickedMarker = Marker(
+        markerId: const MarkerId('picked'),
+        position: latlng,
+        infoWindow: const InfoWindow(title: 'Lokasi Dipilih (No Address)'),
+      );
+      _pickedAddress = 'Tidak bisa memuat alamat (timeout). Koordinat: (${latlng.latitude}, ${latlng.longitude})';
     });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Gagal mendapatkan alamat: Timeout"),
+        duration: Duration(seconds: 3),
+      ),
+    );
+  } catch (e) {
+    // Tangani error lain
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Error saat memuat alamat: $e")),
+    );
   }
+}
+
 
   void _confirmSelection() {
     showDialog(
