@@ -14,7 +14,11 @@ class BodyDetails extends StatelessWidget {
       child: Column(
         children: <Widget> [
           ImageAndIcons(size: size),
-          TitleAndPrice()
+          TitleAndPrice(
+            title: "Angelica",
+            country: "Russia",
+            price: 440,
+          )
         ],
       ),
     );
@@ -23,8 +27,14 @@ class BodyDetails extends StatelessWidget {
 
 class TitleAndPrice extends StatelessWidget {
   const TitleAndPrice({
+    required this.title,
+    required this.country,
+    required this.price,
     super.key,
   });
+
+  final String title, country;
+  final int price;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +46,7 @@ class TitleAndPrice extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Angelica",
+                "$title\n",
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   color: kTextColor, 
                   fontWeight: FontWeight.bold,
@@ -44,7 +54,7 @@ class TitleAndPrice extends StatelessWidget {
                 maxLines: 1,
               ),
               Text(
-                "Russia",
+                country,
                 style: TextStyle(
                   fontSize: 20,
                   color: kPrimaryColor,
@@ -55,7 +65,7 @@ class TitleAndPrice extends StatelessWidget {
           ), 
           Spacer(),
           Text(
-            "\$440",
+            "\$$price",
             style: Theme.of(context)
                 .textTheme
                 .titleLarge?.copyWith(color: kPrimaryColor),
