@@ -17,9 +17,49 @@ class Body extends StatelessWidget {
         child: Column(
           children: <Widget>[
             HeaderWithSearchBox(size: size),
-            TextWithCustomUnderline(text: "Recommended",),
+            TitleWithMoreButton(
+              title: "Recommended",
+              press: () {},
+            ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class TitleWithMoreButton extends StatelessWidget {
+  const TitleWithMoreButton({
+    required this.title,
+    required this.press,
+    super.key,
+  });
+
+  final String title;
+  final VoidCallback press;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+      child: Row(
+        children: [
+          TextWithCustomUnderline(text: title),
+          Spacer(),
+          TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: kPrimaryColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+            onPressed: press,
+            child: Text(
+              "More", 
+              style: TextStyle(color: Colors.white)
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -43,10 +83,7 @@ class TextWithCustomUnderline extends StatelessWidget {
             padding: const EdgeInsets.only(left: kDefaultPadding / 4),
             child: Text(
               text,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
           Positioned(
