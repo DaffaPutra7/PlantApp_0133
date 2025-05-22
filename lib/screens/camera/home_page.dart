@@ -53,7 +53,7 @@ class _FullPageState extends State<FullPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Beranda')),
+      appBar: AppBar(title: const Text('Halaman Kamera')),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
