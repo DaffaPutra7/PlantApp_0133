@@ -13,7 +13,53 @@ class BodyDetails extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: <Widget> [
-          ImageAndIcons(size: size)
+          ImageAndIcons(size: size),
+          TitleAndPrice()
+        ],
+      ),
+    );
+  }
+}
+
+class TitleAndPrice extends StatelessWidget {
+  const TitleAndPrice({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+      child: Row(
+        children: <Widget> [
+          Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Angelica",
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: kTextColor, 
+                  fontWeight: FontWeight.bold,
+                ),
+                maxLines: 1,
+              ),
+              Text(
+                "Russia",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.w300
+                ),
+              ),
+            ],
+          ), 
+          Spacer(),
+          Text(
+            "\$440",
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge?.copyWith(color: kPrimaryColor),
+          ) 
         ],
       ),
     );
