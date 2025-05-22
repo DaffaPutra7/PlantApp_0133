@@ -9,62 +9,78 @@ class BodyDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Column(
-      children: <Widget> [
-        SizedBox(
-          height: size.height * 0.8,
-          child: Row(
-            children: <Widget> [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: kDefaultPadding * 3),
-                  child: Column(
-                    children: <Widget> [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: IconButton(
-                          padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          }, 
-                          icon: SvgPicture.asset("assets/icons/back_arrow.svg", height: 50, width: 50),
-                        ),
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget> [
+          Padding(
+            padding: const EdgeInsets.only(bottom: kDefaultPadding * 3),
+            child: SizedBox(
+              height: size.height * 0.8,
+              child: Row(
+                children: <Widget> [
+                  Expanded(
+                    child: ImageAndIcons(),
+                  ),
+                  Container(
+                    height: size.height * 0.8,
+                    width: size.width * 0.75,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(63),
+                        bottomLeft: Radius.circular(63)
                       ),
-                      Spacer(),
-                      IconCard(icon: "assets/icons/sun.svg"),
-                      IconCard(icon: "assets/icons/thermometer.svg"),
-                      IconCard(icon: "assets/icons/water-drop.svg"),
-                      IconCard(icon: "assets/icons/wind.svg"),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                height: size.height * 0.8,
-                width: size.width * 0.75,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(63),
-                    bottomLeft: Radius.circular(63)
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(0, 10),
-                      blurRadius: 60,
-                      color: kPrimaryColor.withOpacity(0.30)
-                    )
-                  ],
-                  image: DecorationImage(
-                    alignment: Alignment.centerLeft,
-                    fit: BoxFit.cover,
-                    image: AssetImage("assets/images/image.jpg") 
+                      boxShadow: [
+                        BoxShadow(
+                          offset: Offset(0, 10),
+                          blurRadius: 60,
+                          color: kPrimaryColor.withOpacity(0.30)
+                        )
+                      ],
+                      image: DecorationImage(
+                        alignment: Alignment.centerLeft,
+                        fit: BoxFit.cover,
+                        image: AssetImage("assets/images/image.jpg") 
+                      )
+                    ),
                   )
-                ),
-              )
-            ],
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class ImageAndIcons extends StatelessWidget {
+  const ImageAndIcons({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: kDefaultPadding * 3),
+      child: Column(
+        children: <Widget> [
+          Align(
+            alignment: Alignment.topLeft,
+            child: IconButton(
+              padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
+              onPressed: () {
+                Navigator.pop(context);
+              }, 
+              icon: SvgPicture.asset("assets/icons/back_arrow.svg", height: 50, width: 50),
+            ),
           ),
-        )
-      ],
+          Spacer(),
+          IconCard(icon: "assets/icons/sun.svg"),
+          IconCard(icon: "assets/icons/thermometer.svg"),
+          IconCard(icon: "assets/icons/water-drop.svg"),
+          IconCard(icon: "assets/icons/wind.svg"),
+        ],
+      ),
     );
   }
 }
